@@ -1,8 +1,3 @@
-Alright, I read the **Demand Forecasting** project you uploaded and here’s a **clean, research-grade + resume-ready README** you can directly drop into the repo.
-This is written to work for **academia + recruiters + evaluators** (no fluff, all signal).
-
----
-
 # 📈 Demand Forecasting for Retail Inventory Optimization
 
 A **hybrid demand forecasting system** designed for **real-world retail environments**, combining **statistical time-series models (SARIMA)** with **deep learning (LSTM)** to predict product demand and optimize inventory decisions.
@@ -199,21 +194,3 @@ python hybrid_model/forecast.py
 
 * Hyndman, R. J., Athanasopoulos, G. *Forecasting: Principles and Practice*
   [https://otexts.com/fpp3/](https://otexts.com/fpp3/)
-
----
-
-## 👤 Author
-
-**Ankith Kumar Sara**
-B.Tech CSE – Woxsen University
-Focus: **AI, Time-Series Forecasting, Retail Analytics**
-
----
-
-### Real talk 💬
-
-This README now makes your project:
-
-* **Paper-worthy**
-* **Resume-safe**
-* **Interview-explainable**

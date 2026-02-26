@@ -1,41 +1,60 @@
-# 📈 Demand Forecasting for Retail Inventory Optimization
+# Demand Forecasting for Retail Inventory Optimization
 
-A **hybrid demand forecasting system** designed for **real-world retail environments**, combining **statistical time-series models (SARIMA)** with **deep learning (LSTM)** to predict product demand and optimize inventory decisions.
+A hybrid demand forecasting system that combines **SARIMA** (statistical time-series) with **LSTM** (deep learning) to predict product demand and support inventory decisions for small and medium retailers.
 
-The project targets **small and medium retailers**, especially in **diverse Indian markets**, where inaccurate forecasts lead to overstocking, wastage, and revenue loss.
-
----
-
-## 🔍 Problem Statement
-
-Retailers often struggle with:
-
-* Demand volatility
-* Seasonal patterns
-* Regional buying behavior
-* Over-dependence on intermediaries
-
-Traditional forecasting models fail to generalize, while pure deep learning models lack interpretability.
-
-👉 This project bridges that gap using a **hybrid forecasting approach**.
+Built with real Indian retail market data in mind, where seasonal patterns, regional buying behavior, and demand volatility make single-model approaches unreliable.
 
 ---
 
-## 🧠 Solution Overview
+## The Problem
 
-The system:
+Retailers — particularly in diverse regional markets — routinely face overstocking, wastage, and revenue loss because their forecasting tools are too rigid. Statistical models like ARIMA handle trend and seasonality well but miss non-linear demand spikes. Pure deep learning models capture complexity but sacrifice interpretability and require large datasets. Neither alone is sufficient.
 
-1. Analyzes historical sales data
-2. Captures **trend + seasonality** using SARIMA
-3. Learns **non-linear demand patterns** using LSTM
-4. Produces accurate short-term demand forecasts
-5. Supports **inventory optimization & procurement planning**
-
-Achieved **~82% forecasting accuracy** on real retail datasets.
+This project addresses that gap with a **hybrid architecture** that uses each model for what it does best.
 
 ---
 
-## 🏗️ Tech Stack
+## How It Works
+
+```
+Raw Sales Data
+     ↓
+Preprocessing & Feature Engineering
+     ↓
+SARIMA  →  Captures trend + seasonality
+     ↓
+LSTM    →  Learns residual non-linear patterns
+     ↓
+Hybrid Forecast Output
+     ↓
+Inventory & Procurement Insights
+```
+
+SARIMA runs first, providing a structured baseline forecast. Its output is then passed as an input signal to the LSTM, which learns the non-linear demand behavior that SARIMA can't model. The combination reduces variance and improves robustness over either model alone.
+
+---
+
+## Methodology
+
+**Data Preprocessing** — missing value handling, normalization, and time-index alignment to prepare retail sales data for both model types.
+
+**SARIMA Modeling** — captures seasonal cycles and long-run trends, acts as an interpretable baseline, and provides the structured signal fed into the LSTM.
+
+**LSTM Modeling** — learns complex, non-linear demand patterns and handles sudden fluctuations that pure statistical models miss.
+
+**Hybrid Integration** — SARIMA output is used as a feature input to the LSTM, letting the deep learning layer focus on what the statistical model leaves unexplained.
+
+---
+
+## Results
+
+- ~82% forecasting accuracy on real retail datasets
+- Measurable reduction in stock inefficiencies
+- Applicable across product categories and regional demand profiles
+
+---
+
+## Tech Stack
 
 | Layer              | Technology                |
 | ------------------ | ------------------------- |
@@ -44,112 +63,53 @@ Achieved **~82% forecasting accuracy** on real retail datasets.
 | Deep Learning      | LSTM (Keras / TensorFlow) |
 | Data Processing    | Pandas, NumPy             |
 | Visualization      | Matplotlib, Seaborn       |
-| Evaluation         | MAE, RMSE, MAPE           |
+| Evaluation Metrics | MAE, RMSE, MAPE           |
 
 ---
 
-## 🧩 System Architecture
+## Project Structure
 
-```text
-Raw Sales Data
-     ↓
-Preprocessing & Cleaning
-     ↓
-SARIMA (Trend + Seasonality)
-     ↓
-LSTM (Non-linear Patterns)
-     ↓
-Hybrid Forecast Output
-     ↓
-Inventory & Demand Insights
 ```
-
-This architecture ensures:
-
-* **Interpretability** (from SARIMA)
-* **Adaptability** (from LSTM)
-* **Improved accuracy** over single-model approaches
-
----
-
-## 📁 Project Structure
-
-```text
-data/               → Retail sales datasets
-preprocessing/      → Data cleaning & feature engineering
-sarima_model/       → Statistical time-series forecasting
-lstm_model/         → Deep learning-based forecasting
-hybrid_model/       → SARIMA + LSTM integration
-evaluation/         → Accuracy metrics & validation
-visualization/      → Forecast plots & analysis
+data/             → Retail sales datasets
+preprocessing/    → Data cleaning and feature engineering
+sarima_model/     → Statistical time-series forecasting
+lstm_model/       → Deep learning forecasting
+hybrid_model/     → SARIMA + LSTM integration
+evaluation/       → Accuracy metrics and validation
+visualization/    → Forecast plots and analysis
 ```
 
 ---
 
-## ⚙️ Methodology
+## Getting Started
 
-### 1️⃣ Data Preprocessing
-
-* Missing value handling
-* Normalization
-* Time-index alignment
-
-### 2️⃣ SARIMA Modeling
-
-* Captures seasonality & trend
-* Acts as a strong baseline
-* Improves explainability
-
-### 3️⃣ LSTM Modeling
-
-* Learns complex, non-linear demand behavior
-* Handles sudden demand fluctuations
-
-### 4️⃣ Hybrid Integration
-
-* SARIMA output fed as an input signal to LSTM
-* Reduces variance and improves robustness
-
----
-
-## 📊 Results
-
-* 📈 **Forecasting Accuracy:** ~82%
-* 📉 Reduced stock inefficiencies
-* 🧠 Better demand understanding across regions
-* 🏪 Practical applicability for retail inventory planning
-
----
-
-## 🚀 How to Run the Project
-
-### 1️⃣ Clone the repository
+### 1. Clone the repo
 
 ```bash
 git clone <your-repo-url>
 cd demand-forecasting
 ```
 
-### 2️⃣ Install dependencies
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Run preprocessing
+### 3. Preprocess data
 
 ```bash
 python preprocessing/preprocess.py
 ```
 
-### 4️⃣ Train models
+### 4. Train models
 
 ```bash
 python sarima_model/train.py
 python lstm_model/train.py
 ```
 
-### 5️⃣ Generate forecasts
+### 5. Generate forecasts
 
 ```bash
 python hybrid_model/forecast.py
@@ -157,40 +117,35 @@ python hybrid_model/forecast.py
 
 ---
 
-## 📌 Use Cases
+## What I Learned
 
-* Retail inventory optimization
-* Demand-driven procurement planning
-* Reducing overstock and wastage
-* Supply chain decision support
-
----
-
-## 🛠️ Limitations
-
-* Cyclic demand patterns were **not explicitly modeled**
-* LSTM trained on historical data only (no external signals like weather or promotions)
-* Real-time forecasting not implemented yet
+- **Hybrid model design** — learning when to layer models rather than choosing between them; the key insight was that SARIMA's residuals carry non-linear signal that LSTM can learn from, making the combination more powerful than stacking them independently
+- **Time-series data discipline** — proper time-index alignment and avoiding data leakage in train/test splits are easy to get wrong and have a large effect on reported accuracy
+- **Interpretability vs. accuracy trade-offs** — SARIMA alone is explainable to a non-technical stakeholder; LSTM alone is opaque but more accurate; the hybrid forces a deliberate decision about how much interpretability to preserve at each stage
+- **Evaluation metric selection** — MAPE is intuitive for retail contexts (percentage error maps to business impact) but breaks down near zero-demand periods; understanding when to prefer MAE vs. RMSE vs. MAPE matters for honest model comparison
 
 ---
 
-## 🔮 Future Enhancements
+## Limitations
 
-* Add **cyclic demand modeling**
-* Integrate **external factors** (weather, festivals, promotions)
-* Deploy as a **real-time forecasting API**
-* Explore **Transformer-based time-series models**
-* Retailer-manufacturer direct integration
+- Cyclic demand patterns (e.g. multi-year product cycles) not explicitly modeled
+- LSTM trained on historical sales only — no external signals such as weather, local festivals, or promotions
+- Real-time forecasting not yet implemented
 
 ---
 
-## 📚 References & Sources
+## Roadmap
 
-* Box, G. E. P., Jenkins, G. M., Reinsel, G. C. *Time Series Analysis: Forecasting and Control*
-  [https://www.wiley.com/en-us/Time+Series+Analysis%3A+Forecasting+and+Control-p-9780470272848](https://www.wiley.com/en-us/Time+Series+Analysis%3A+Forecasting+and+Control-p-9780470272848)
+- [ ] Cyclic demand modeling
+- [ ] External factor integration (weather, festival calendars, promotional events)
+- [ ] Real-time forecasting API
+- [ ] Transformer-based time-series models (e.g. Temporal Fusion Transformer)
+- [ ] Direct retailer–manufacturer integration for procurement automation
 
-* Hochreiter, S., Schmidhuber, J. (1997). *Long Short-Term Memory*. Neural Computation
-  [https://www.bioinf.jku.at/publications/older/2604.pdf](https://www.bioinf.jku.at/publications/older/2604.pdf)
+---
 
-* Hyndman, R. J., Athanasopoulos, G. *Forecasting: Principles and Practice*
-  [https://otexts.com/fpp3/](https://otexts.com/fpp3/)
+## References
+
+- Box, Jenkins, Reinsel. *Time Series Analysis: Forecasting and Control* — [Wiley](https://www.wiley.com/en-us/Time+Series+Analysis%3A+Forecasting+and+Control-p-9780470272848)
+- Hochreiter & Schmidhuber (1997). *Long Short-Term Memory*. Neural Computation — [PDF](https://www.bioinf.jku.at/publications/older/2604.pdf)
+- Hyndman & Athanasopoulos. *Forecasting: Principles and Practice* — [otexts.com/fpp3](https://otexts.com/fpp3/)
